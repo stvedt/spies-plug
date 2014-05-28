@@ -3,7 +3,17 @@ function callback(obj) {
 	var title = obj.media.title;
 	var author = obj.media.author;
 	var nowPlaying = title + " by  " + author;
-	new Notification( "Now Playing in the Spies Room" , { icon: 'http://stephentvedt.com/fun/icon-128.png', body: nowPlaying });
+    var playedBy = "Played by " + obj.dj.username;
+
+	var notification = new Notification( nowPlaying, { icon: 'http://stephentvedt.com/fun/icon-128.png', body: playedBy });
+
+    notification.onshow = function () {
+      setTimeout( function() { notification.close(); }, 6000);
+    }
+
+    notification.onclick = function(x) {
+        window.focus();
+    };
 
 }
 
