@@ -9,11 +9,14 @@
   "content_scripts": [
     {
       "matches": ["http://plug.dj/80f368f6/"],
-      "css": ["style.css"]
+      "css": ["style.css"],
+      "js": ["inject.js"]
     }
   ],
   "permissions": [
-    "http://plug.dj/"
-  ]
+    "http://plug.dj/",
+    "notifications"
+  ],
+  "web_accessible_resources": ["main.js"]
 
 }
