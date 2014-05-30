@@ -1,4 +1,4 @@
-function callback(obj) {
+function callbackDJAdvance(obj) {
 
 	var title = obj.media.title;
 	var author = obj.media.author;
@@ -63,7 +63,7 @@ $(window).on('load', function(){
 
 function init() {
     //Write your code here
-    API.on(API.DJ_ADVANCE, callback);
+    API.on(API.DJ_ADVANCE, callbackDJAdvance);
 }
 function cinit() {
     if (typeof window.API == "object") {
