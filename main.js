@@ -1,7 +1,9 @@
 function callbackDJAdvance(obj) {
 
   //Auto-woot
-  $('#woot').delay(3000).trigger("click");
+  setTimeout( function(){
+    $('#woot').trigger("click");
+  }, 4000);
 
 	var title = obj.media.title;
 	var author = obj.media.author;
