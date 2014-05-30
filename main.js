@@ -1,5 +1,8 @@
 function callbackDJAdvance(obj) {
 
+  //Auto-woot
+  $('#woot').delay(3000).trigger("click");
+
 	var title = obj.media.title;
 	var author = obj.media.author;
 	var nowPlaying = title + " by  " + author;
