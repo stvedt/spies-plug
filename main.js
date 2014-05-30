@@ -3,7 +3,7 @@ function callback(obj) {
 	var title = obj.media.title;
 	var author = obj.media.author;
 	var nowPlaying = title + " by  " + author;
-    var playedBy = "Played by " + obj.dj.username;
+  var playedBy = "Played by " + obj.dj.username;
 
 	var notification = new Notification( nowPlaying, { icon: 'http://stephentvedt.com/fun/icon-128.png', body: playedBy });
 
@@ -17,7 +17,7 @@ function callback(obj) {
 
 }
 
-function notifyMe(){
+function checkNotifcationsEnabled(){
 
   // Let's check if the browser supports notifications
   if (!("Notification" in window)) {
@@ -55,7 +55,7 @@ function notifyMe(){
 
 $(window).on('load', function(){
   var $button = $('body').one('click', function(){
-    notifyMe();
+    checkNotifcationsEnabled();
   });
 });
 
