@@ -7,13 +7,8 @@ function callbackDJAdvance(obj) {
 
 	var notification = new Notification( nowPlaying, { icon: 'http://stephentvedt.com/fun/icon-128.png', body: playedBy });
 
-    notification.onshow = function () {
-      setTimeout( function() { notification.close(); }, 6000);
-    }
-
-    notification.onclick = function(x) {
-        window.focus();
-    };
+    notification.onshow = function () { setTimeout( function() { notification.close(); }, 6000); }
+    notification.onclick = function(x) { window.focus(); }
 
 }
 
@@ -26,16 +21,15 @@ function callbackChat (data) {
   data.fromID // the user id of the person
 
   data.message // the chat message
-  console.log(data.message)
+
   var userNameMention = '@'+ API.getUser().username;
 
   data.language // the two character code of the incoming language
   if ( data.message.indexOf(userNameMention) > -1 ){
-    console.log('mentioned')
+    var notification = new Notification( "You were mentioned in chat!", { icon: 'http://stephentvedt.com/fun/icon-128.png', body: data.message });
+
+    notification.onclick = function(x) { window.focus(); }
   }
-
-
-  var notification = new Notification( "You were mentioned in chat!", { icon: 'http://stephentvedt.com/fun/icon-128.png', body: data.message });
 
 }
 
