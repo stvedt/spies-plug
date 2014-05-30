@@ -17,6 +17,28 @@ function callbackDJAdvance(obj) {
 
 }
 
+function callbackChat (data) {
+
+  data.type // "message", "emote", "moderation", "system"
+
+  data.from // the username of the person
+
+  data.fromID // the user id of the person
+
+  data.message // the chat message
+  console.log(data.message)
+  var userNameMention = '@'+ API.getUser().username;
+
+  data.language // the two character code of the incoming language
+  if ( data.message.indexOf(userNameMention) > -1 ){
+    console.log('mentioned')
+  }
+
+
+  var notification = new Notification( "You were mentioned in chat!", { icon: 'http://stephentvedt.com/fun/icon-128.png', body: data.message });
+
+}
+
 function checkNotifcationsEnabled(){
 
   // Let's check if the browser supports notifications
@@ -64,6 +86,8 @@ $(window).on('load', function(){
 function init() {
     //Write your code here
     API.on(API.DJ_ADVANCE, callbackDJAdvance);
+    API.on(API.CHAT, callbackChat);
+
 }
 function cinit() {
     if (typeof window.API == "object") {
