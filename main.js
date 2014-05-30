@@ -1,23 +1,39 @@
-function callback(obj) {
+function callbackDJAdvance(obj) {
 
 	var title = obj.media.title;
 	var author = obj.media.author;
 	var nowPlaying = title + " by  " + author;
-    var playedBy = "Played by " + obj.dj.username;
+  var playedBy = "Played by " + obj.dj.username;
 
 	var notification = new Notification( nowPlaying, { icon: 'http://stephentvedt.com/fun/icon-128.png', body: playedBy });
 
-    notification.onshow = function () {
-      setTimeout( function() { notification.close(); }, 6000);
-    }
-
-    notification.onclick = function(x) {
-        window.focus();
-    };
+    notification.onshow = function () { setTimeout( function() { notification.close(); }, 6000); }
+    notification.onclick = function(x) { window.focus(); }
 
 }
 
-function notifyMe(){
+function callbackChat (data) {
+
+  data.type // "message", "emote", "moderation", "system"
+
+  data.from // the username of the person
+
+  data.fromID // the user id of the person
+
+  data.message // the chat message
+
+  var userNameMention = '@'+ API.getUser().username;
+
+  data.language // the two character code of the incoming language
+  if ( data.message.indexOf(userNameMention) > -1 ){
+    var notification = new Notification( "You were mentioned in chat!", { icon: 'http://stephentvedt.com/fun/icon-128.png', body: data.message });
+
+    notification.onclick = function(x) { window.focus(); }
+  }
+
+}
+
+function checkNotifcationsEnabled(){
 
   // Let's check if the browser supports notifications
   if (!("Notification" in window)) {
@@ -55,7 +71,7 @@ function notifyMe(){
 
 $(window).on('load', function(){
   var $button = $('body').one('click', function(){
-    notifyMe();
+    checkNotifcationsEnabled();
   });
 });
 
@@ -63,7 +79,9 @@ $(window).on('load', function(){
 
 function init() {
     //Write your code here
-    API.on(API.DJ_ADVANCE, callback);
+    API.on(API.DJ_ADVANCE, callbackDJAdvance);
+    API.on(API.CHAT, callbackChat);
+
 }
 function cinit() {
     if (typeof window.API == "object") {
