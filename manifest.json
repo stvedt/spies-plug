@@ -3,20 +3,18 @@
 
   "name": "Spies Plug",
   "description": "This extension adds the Spies Background to the Spies Plug.dj room",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "icons": { "128": "img/icon-128.png" },
 
   "content_scripts": [
     {
-      "matches": ["http://plug.dj/80f368f6/"],
-      "css": ["style.css"],
-      "js": ["inject.js"]
+      "matches": ["https://plug.dj/80f368f6/"],
+      "css": ["style.css"]
     }
   ],
   "permissions": [
-    "http://plug.dj/",
+    "https://plug.dj/",
     "notifications"
-  ],
-  "web_accessible_resources": ["main.js"]
+  ]
 
 }
